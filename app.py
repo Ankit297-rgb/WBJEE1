@@ -2,16 +2,17 @@ from flask import Flask, request, jsonify
 import pickle
 from flask_cors import CORS
 import os
+import requests
+import gdown
 
 app = Flask(__name__)
 
 CORS(app)
 
-# Google Drive File ID
 FILE_ID = "182LcZMp8lfeDFS6AzzBlTOg81eK8C3EJ"  # Replace with your file ID
-MODEL_URL = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
+MODEL_PATH=gdown.download(f"https://drive.google.com/uc?id={FILE_ID}", "model.pkl", quiet=False)
 
-MODEL_PATH = "model.pkl"
+
 
 # Download only once
 if not os.path.exists(MODEL_PATH):
